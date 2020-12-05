@@ -53,6 +53,8 @@ def constructEmailBody(items):
     for item in items:
         email_body += '<p>' + item + '</p>'
 
+    return email_body
+
 while 1 == 1:
     items = search('lv bags')    
     sendEmail(constructEmailBody(items))
