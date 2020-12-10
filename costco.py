@@ -28,7 +28,7 @@ def sendEmail(mail_msg):
     receivers = ['smiletan0115@outlook.com']
 
     gmail_user = 'hujunwei0614@gmail.com'
-    gmail_password = ''
+    gmail_password = ''
 
     message = MIMEText(mail_msg, 'html', 'utf-8')
     message['From'] = Header("Costco刷包", 'utf-8')
@@ -56,7 +56,22 @@ def constructEmailBody(items):
     return email_body
 
 while 1 == 1:
-    items = search('lv bags')    
-    sendEmail(constructEmailBody(items))
+    print('****** start another round ******')
+    search_str = 'celine'
+    item_str = 'niki'
 
+    items = search(search_str)
+    print(items)
+
+    if len(items) > 0: 
+        if any(item_str.lower() in s.lower() for s in items):
+            sendEmail(constructEmailBody(items))
+        else:
+            print('No ' + search_str + ' found')
+    else:
+        print('No items found')
+    
+    print('****** end another round ******')
+    print('\n\n')
     time.sleep(300)
+    
