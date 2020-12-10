@@ -23,12 +23,11 @@ def search(keyword):
 
     return item_names
 
-def sendEmail(mail_msg):
+def sendEmail(mail_msg, gmail_password):
     sender = 'hujunwei0614@gmail.com'
     receivers = ['smiletan0115@outlook.com']
 
     gmail_user = 'hujunwei0614@gmail.com'
-    gmail_password = ''
 
     message = MIMEText(mail_msg, 'html', 'utf-8')
     message['From'] = Header("Costco刷包", 'utf-8')
@@ -48,15 +47,17 @@ def sendEmail(mail_msg):
         print ("Error: Unable to send email")
 
 def constructEmailBody(items):
-    email_body = '<h4>Lv bags in costco...</h4>'
+    email_body = '<h4>Found bags in costco...</h4>'
 
     for item in items:
         email_body += '<p>' + item + '</p>'
 
     return email_body
 
+
+gmail_pwd = input('Input gmail password:\n')
 while 1 == 1:
-    print('****** start another round ******')
+    print('****** start round ******')
     search_str = 'celine'
     item_str = 'niki'
 
@@ -65,13 +66,15 @@ while 1 == 1:
 
     if len(items) > 0: 
         if any(item_str.lower() in s.lower() for s in items):
-            sendEmail(constructEmailBody(items))
+            sendEmail(constructEmailBody(items), gmail_pwd)
+            print('Found' + search_str)
         else:
             print('No ' + search_str + ' found')
     else:
         print('No items found')
     
-    print('****** end another round ******')
-    print('\n\n')
+    t = time.localtime()
+    current_time = time.strftime("%H:%M:%S", t)
+    print('****** end round at ' + current_time + '******\n\n' )
     time.sleep(300)
     
