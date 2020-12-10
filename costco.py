@@ -71,9 +71,9 @@ while 1 == 1:
     if len(items) > 0: 
         if any(item_str.lower() in s.lower() for s in items):
             sendEmail(constructEmailBody(items), gmail_pwd)
-            print('Found' + search_str)
+            print('Found' + item_str)
         else:
-            print('No ' + search_str + ' found')
+            print('Found items but no ' + item_str + ' found in search results')
     else:
         print('No items found')
     
