@@ -58,7 +58,11 @@ def constructEmailBody(items):
 gmail_pwd = input('Input gmail password:\n')
 while 1 == 1:
     print('****** start round ******')
-    search_str = 'celine'
+
+    # REPLACE HERE FOR SEARCH BOX IN COSTCO PAGE
+    search_str = 'ysl+niki'
+
+    # REPLACE HERE FOR TARGET ITEM FOUND
     item_str = 'niki'
 
     items = search(search_str)
