@@ -72,7 +72,7 @@ while 1 == 1:
     print(items)
 
     if len(items) > 0: 
-        if True: 
+        if any(item_match_str.lower() in s.lower() for s in items):
             sendEmail(constructEmailBody(items, item_match_str), gmail_pwd)
             print('Found' + item_match_str)
         else:
