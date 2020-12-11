@@ -31,7 +31,7 @@ def sendEmail(mail_msg, gmail_password):
 
     message = MIMEText(mail_msg, 'html', 'utf-8')
     message['From'] = Header("Costco刷包", 'utf-8')
-    message['To'] =  Header("剁手", 'utf-8')
+    message['To'] =  Header("剁手笑", 'utf-8')
     message['Subject'] = Header('找到包了！！', 'utf-8')
      
     try:
@@ -50,7 +50,7 @@ def constructEmailBody(items, item_match_str):
     email_body = '<h4>Found bags in costco</h4>'
 
     for item in items:
-        if item_match_str in item:
+        if item_match_str.lower() in item.lower():
             email_body += '<p><span style="color:red">' + item + '</span></p>'
         else:
             email_body += '<p>' + item + '</p>'
