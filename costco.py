@@ -25,14 +25,14 @@ def search(keyword):
 
 def sendEmail(mail_msg, gmail_password):
     sender = 'hujunwei0614@gmail.com'
-    receivers = ['smiletan0115@outlook.com']
+    receivers = ['smiletan0115@outlook.com', 'jasonhu0614@outlook.com']
 
     gmail_user = 'hujunwei0614@gmail.com'
 
     message = MIMEText(mail_msg, 'html', 'utf-8')
     message['From'] = Header("Costco刷包", 'utf-8')
     message['To'] =  Header("剁手", 'utf-8')
-    message['Subject'] = Header('Costco刷包', 'utf-8')
+    message['Subject'] = Header('找到包了！！', 'utf-8')
      
     try:
         server = smtplib.SMTP_SSL('smtp.gmail.com', 465)
@@ -46,11 +46,14 @@ def sendEmail(mail_msg, gmail_password):
         print (e)
         print ("Error: Unable to send email")
 
-def constructEmailBody(items):
-    email_body = '<h4>Found bags in costco...</h4>'
+def constructEmailBody(items, item_match_str):
+    email_body = '<h4>Found bags in costco</h4>'
 
     for item in items:
-        email_body += '<p>' + item + '</p>'
+        if item_match_str in item:
+            email_body += '<p><span style="color:red">' + item + '</span></p>'
+        else:
+            email_body += '<p>' + item + '</p>'
 
     return email_body
 
@@ -63,17 +66,17 @@ while 1 == 1:
     search_str = 'ysl+niki'
 
     # REPLACE HERE FOR TARGET ITEM FOUND
-    item_str = 'niki'
+    item_match_str = 'niki'
 
     items = search(search_str)
     print(items)
 
     if len(items) > 0: 
-        if any(item_str.lower() in s.lower() for s in items):
-            sendEmail(constructEmailBody(items), gmail_pwd)
-            print('Found' + item_str)
+        if True: 
+            sendEmail(constructEmailBody(items, item_match_str), gmail_pwd)
+            print('Found' + item_match_str)
         else:
-            print('Found items but no ' + item_str + ' found in search results')
+            print('Found items but no ' + item_match_str + ' found in search results')
     else:
         print('No items found')
     
