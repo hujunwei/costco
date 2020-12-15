@@ -2,14 +2,20 @@ import requests
 import re
 import time
 import smtplib
+import io
 from email.mime.text import MIMEText
 from email.header import Header
 
 def search(keyword):
     url = 'https://www.costco.com/CatalogSearch?dept=All&keyword=' + keyword
-    headers = {"User-Agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.116 Safari/537.36"}
+    headers = {"User-Agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.116 Safari/537.36", "Cache-Control":"no-store, max-age=0"}
     page = requests.get(url, headers=headers)
     content = page.text
+    
+    # #Write to file
+    # with io.open("debug.txt", "w", encoding="utf-8") as f:
+    #     f.write(content)
+
     print(page.status_code)
 
     # Find item
@@ -83,5 +89,5 @@ while 1 == 1:
     t = time.localtime()
     current_time = time.strftime("%H:%M:%S", t)
     print('****** end round at ' + current_time + '******\n\n' )
-    time.sleep(300)
+    time.sleep(60)
     
